@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user! # Ensures user authentication before accessing tasks
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [ :edit, :update, :destroy ]
 
   # List all tasks for the logged-in user
   def index
@@ -16,9 +16,9 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params) # Assign task to current user
     if @task.save
-      redirect_to tasks_path, notice: 'Task created successfully!'
+      redirect_to tasks_path, notice: "Task created successfully!"
     else
-      flash.now[:alert] = 'Failed to create task'
+      flash.now[:alert] = "Failed to create task"
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,9 +31,9 @@ class TasksController < ApplicationController
   # Update an existing task
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: 'Task updated successfully!'
+      redirect_to tasks_path, notice: "Task updated successfully!"
     else
-      flash.now[:alert] = 'Failed to update task'
+      flash.now[:alert] = "Failed to update task"
       render :edit, status: :unprocessable_entity
     end
   end
@@ -42,9 +42,9 @@ class TasksController < ApplicationController
   def destroy
     @task = current_user.tasks.find(params[:id])
     if @task.destroy
-      redirect_to tasks_path, notice: 'Task deleted successfully!'
+      redirect_to tasks_path, notice: "Task deleted successfully!"
     else
-      redirect_to tasks_path, alert: 'Failed to delete task'
+      redirect_to tasks_path, alert: "Failed to delete task"
     end
   end
 
@@ -54,7 +54,7 @@ class TasksController < ApplicationController
   def set_task
     @task = current_user.tasks.find_by(id: params[:id])
     unless @task
-      redirect_to tasks_path, alert: 'Task not found or does not belong to you'
+      redirect_to tasks_path, alert: "Task not found or does not belong to you"
     end
   end
 
