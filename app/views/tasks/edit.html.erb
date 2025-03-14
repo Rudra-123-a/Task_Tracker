@@ -1,0 +1,23 @@
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+  <h1>Edit Task</h1>
+
+  <div style="width: 50%; max-width: 500px;">
+    <%= form_with(model: @task, url: task_path(@task), method: :patch, local: true) do |form| %>
+      <div class="field">
+        <%= form.label :title, "Task Title" %>
+        <%= form.text_field :title, required: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :description, "Task Description" %>
+        <%= form.text_area :description, required: true %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Update Task" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "Back to Tasks", tasks_path %>
+</div>

@@ -1,0 +1,28 @@
+<div class="tasks-container">
+<h1>List of Tasks</h1>
+
+<table class="task-table">
+  <thead>
+    <tr>
+      <th>📌 Title</th>
+      <th>📝 Description</th>
+      <th>⚡ Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td class="task-actions">
+          <%= link_to '✏ Edit', edit_task_path(task), class: 'btn-edit' %>
+          <%= button_to '🗑 Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-delete' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %>
+</div>
